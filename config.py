@@ -34,7 +34,7 @@ class Config:
     DATA_DIR = "data"
     LOG_DIR = "logs"
 
-# Configuration pour l'API (compatibilité)
+# Configuration pour l'API (compatibilité) - GARDEZ CE DICTIONNAIRE
 API_CONFIG = {
     "host": Config.API_HOST,
     "port": Config.API_PORT,

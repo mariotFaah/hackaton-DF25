@@ -780,3 +780,107 @@ def jobs_by_risk_detailed():
         'risk_categories': risk_categories,
         'timestamp': datetime.now().isoformat()
     })
+
+@bp.route('/demo')
+def demo_endpoint():
+    """Endpoint de démonstration pour le hackathon"""
+    db = next(get_db())
+    
+    # Trouver l'offre la plus à risque pour la démo
+    demo_offer = db.query(JobOffer).filter(
+        JobOffer.is_active == True,
+        JobOffer.ia_risk_level == 'Élevé'
+    ).order_by(
+        desc(JobOffer.ia_risk_score)
+    ).first()
+    
+    if not demo_offer:
+        # Fallback: première offre disponible
+        demo_offer = db.query(JobOffer).filter(
+            JobOffer.is_active == True
+        ).first()
+    
+    if not demo_offer:
+        return jsonify({
+            "error": "Aucune donnée disponible pour la démo",
+            "message": "Lancez le scraper d'abord avec: python scrapers/asako_scraper.py"
+        }), 404
+    
+    # Trouver des recommandations pour ce métier
+    recommendations_query = db.query(JobOffer).filter(
+        JobOffer.is_active == True,
+        JobOffer.ia_risk_score < demo_offer.ia_risk_score,
+        JobOffer.job_title != demo_offer.job_title,
+        JobOffer.job_title != '',
+        JobOffer.job_title != 'Non spécifié'
+    ).order_by(
+        JobOffer.ia_risk_score
+    ).limit(3).all()
+    
+    # Formater les recommandations
+    recommendations = []
+    for rec in recommendations_query:
+        recommendations.append({
+            "job": {
+                "title": rec.title,
+                "ia_risk_score": rec.ia_risk_score,
+                "ia_risk_level": rec.ia_risk_level,
+                "sector": rec.sector,
+                "company": rec.company,
+                "job_title": rec.job_title
+            },
+            "reason": f"Risque réduit de {demo_offer.ia_risk_score - rec.ia_risk_score} points",
+            "difference_risk": round(demo_offer.ia_risk_score - rec.ia_risk_score, 1)
+        })
+    
+    # Statistiques pour la démo
+    stats = {
+        "total_high_risk": db.query(func.count(JobOffer.id)).filter(
+            JobOffer.is_active == True,
+            JobOffer.ia_risk_level == 'Élevé'
+        ).scalar() or 0,
+        "total_medium_risk": db.query(func.count(JobOffer.id)).filter(
+            JobOffer.is_active == True,
+            JobOffer.ia_risk_level == 'Moyen'
+        ).scalar() or 0,
+        "total_low_risk": db.query(func.count(JobOffer.id)).filter(
+            JobOffer.is_active == True,
+            JobOffer.ia_risk_level == 'Faible'
+        ).scalar() or 0,
+        "total_offers": db.query(func.count(JobOffer.id)).filter(
+            JobOffer.is_active == True
+        ).scalar() or 0
+    }
+    
+    return jsonify({
+        "demo_title": "EXEMPLE PARFAIT POUR LE HACKATHON",
+        "demo_offer": {
+            "title": demo_offer.title,
+            "company": demo_offer.company,
+            "sector": demo_offer.sector,
+            "location": demo_offer.location,
+            "contrat": demo_offer.contract_type,
+            "metier": demo_offer.job_title,
+            "ia_risk_score": demo_offer.ia_risk_score,
+            "ia_risk_level": demo_offer.ia_risk_level,
+            "description": demo_offer.description,
+            "suggestions": demo_offer.suggestions.split(', ') if demo_offer.suggestions else [],
+            "link": demo_offer.link,
+            "date": demo_offer.date_posted
+        },
+        "recommendations": recommendations,
+        "statistics": stats,
+        "message": "Parfait pour la démo : métier à haut risque avec alternatives",
+        "demo_flow": [
+            "1. Montrer le métier à haut risque",
+            "2. Expliquer le score IA (1-10)",
+            "3. Proposer des alternatives moins risquées",
+            "4. Montrer le parcours de transition"
+        ],
+        "hackathon_tips": [
+            "Focus sur 'MECANICIEN CONDUCTEUR' (score 9/10)",
+            "Montrer la recherche par synonymes : 'chauffeur' → trouve 'conducteur'",
+            "Démontrer l'analyse de risque en temps réel",
+            "Montrer les suggestions de reconversion personnalisées"
+        ]
+    })
