@@ -1,12 +1,3 @@
-📋 DOCUMENTATION À ENVOYER AU FRONTEND :
-📧 EMAIL/TEXT À ENVOYER :
-text
-Sujet : ✅ Backend Safe AI Hackathon - PRÊT pour intégration
-
-Salut [Nom du dev frontend],
-
-Le backend est COMPLÈTEMENT FONCTIONNEL ! 🎉
-
 📡 **URL de l'API :** http://localhost:5000
 🔥 **Exemple parfait pour la démo :** "MECANICIEN CONDUCTEUR" (score IA 9/10 - RISQUE ÉLEVÉ)
 
@@ -78,9 +69,11 @@ markdown
   "offers_count": 50,
   "search_synonyms_active": true
 }
-2. Toutes les offres
-GET /api/offers
+```
+### 2. Toutes les offres
+**GET /api/offers**
 
+```bash
 json
 {
   "page": 1,
@@ -98,14 +91,16 @@ json
     }
   ]
 }
-3. Offres par métier
-GET /api/offers/chauffeur
+```
+
+### 3. Offres par métier
+**GET /api/offers/chauffeur**
 
 Recherche améliorée avec synonymes
 
 "chauffeur" → trouve aussi "conducteur", "driver", "livreur"
 
-4. Recommandations de transition
+### 4. Recommandations de transition
 GET /api/recommendations/chauffeur
 
 Pour un métier donné
@@ -114,7 +109,7 @@ Propose des alternatives à moindre risque
 
 Retourne top 5 recommandations
 
-5. Analyse des risques
+### 5. Analyse des risques
 GET /api/risk-analysis
 
 Statistiques globales
@@ -123,14 +118,14 @@ Analyse par métier
 
 Exemple de démo inclus
 
-6. Recherche avancée
+### 6. Recherche avancée
 GET /api/search?q=chauffeur&risk=Élevé&sector=Automobile
 
 Recherche texte + filtres
 
 Filtres : risque, secteur, type de métier
 
-7. Endpoint démo
+### 7. Endpoint démo
 GET /api/demo
 
 Exemple parfait pour le pitch
@@ -139,7 +134,7 @@ Exemple parfait pour le pitch
 
 Recommandations alternatives
 
-8. Statistiques
+### 8. Statistiques
 GET /api/statistics
 
 Par type de contrat
@@ -159,6 +154,8 @@ Parcours formation → comment se reconvertir
 
 Structure des données
 typescript
+
+```bash
 interface JobOffer {
   title: string;           // "MECANICIEN CONDUCTEUR"
   link: string;            // URL asako.mg
@@ -177,7 +174,8 @@ interface Recommendation {
   difference_risk: number;  // Réduction du risque
   reason: string;          // Pourquoi c'est mieux
 }
-Points d'intégration frontend
+```
+### Points d'intégration frontend
 Service API : axios.create({ baseURL: 'http://localhost:5000/api' })
 
 Pages principales :
@@ -199,7 +197,7 @@ Recommendations : Liste alternatives
 Statistics : Graphiques
 
 Tests rapides
-bash
+```bash
 # Vérifier API
 curl http://localhost:5000/api/health
 
@@ -208,6 +206,7 @@ curl http://localhost:5000/api/demo
 
 # Recherche chauffeur
 curl http://localhost:5000/api/offers/chauffeur
+```
 Pour le hackathon
 Pitch : "De chauffeur à coordinateur logistique - Notre IA vous montre le chemin !"
 
@@ -260,6 +259,7 @@ export const apiService = {
   search: (query, filters = {}) => 
     api.get('/search', { params: { q: query, ...filters } }),
 };
+```
 🎯 POUR LE PITCH DE 5 MINUTES :
 Scénario de démo :
 
