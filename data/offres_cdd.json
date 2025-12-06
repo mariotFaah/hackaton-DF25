@@ -1,122 +1,27 @@
-[
-  {
-    "title": "Coordonnateur(rice)",
-    "link": "https://www.asako.mg/annonces/8764-coordonnateur-rice",
-    "company": "ccoc",
-    "date": "Il y a 1 jours",
-    "contrat": "CDD",
-    "secteur": "Gestion, Comptabilité, Finance",
-    "metier": "Coordinateur",
-    "location": "Antananarivo",
-    "ia_risk_score": 1,
-    "ia_risk_level": "Faible"
+{
+  "metadata": {
+    "total_offers": 1,
+    "scraped_at": "2025-12-06T16:03:20.713254",
+    "source": "asako.mg"
   },
-  {
-    "title": "Hiring Officer",
-    "link": "https://www.asako.mg/annonces/8751-hiring-officer",
-    "company": "onja",
-    "date": "Il y a 2 jours",
-    "contrat": "CDD",
-    "secteur": "Ressources humaines",
-    "metier": "Ressources Humaines",
-    "location": "Toamasina",
-    "ia_risk_score": 5,
-    "ia_risk_level": "Moyen"
-  },
-  {
-    "title": "MECANICIEN CONDUCTEUR",
-    "link": "https://www.asako.mg/annonces/8733-mecanicien-conducteur",
-    "company": "madagascar-ground-handling",
-    "date": "Il y a 4 jours",
-    "contrat": "CDD",
-    "secteur": "Automobile",
-    "metier": "Mécanicien",
-    "location": "Nosy Be",
-    "ia_risk_score": 9,
-    "ia_risk_level": "Élevé"
-  },
-  {
-    "title": "Ingénieur Telephony pour implémentaation et support",
-    "link": "https://www.asako.mg/annonces/8731-ingenieur-telephony-pour-implementaation-et-support",
-    "company": "r-mad-ltd",
-    "date": "Il y a 4 jours",
-    "contrat": "CDD",
-    "secteur": "Gestion, Comptabilité, Finance",
-    "metier": "Non spécifié",
-    "location": "Antananarivo",
-    "ia_risk_score": 3,
-    "ia_risk_level": "Faible"
-  },
-  {
-    "title": "MEDECIN CONSEIL",
-    "link": "https://www.asako.mg/annonces/8722-medecin-conseil",
-    "company": "ong-medicale-pivot",
-    "date": "Il y a 4 jours",
-    "contrat": "CDD",
-    "secteur": "Santé, Médecine",
-    "metier": "Médecin",
-    "location": "Fianarantsoa",
-    "ia_risk_score": 5,
-    "ia_risk_level": "Moyen"
-  },
-  {
-    "title": "Chargé de recrutement",
-    "link": "https://www.asako.mg/annonces/8705-charge-de-recrutement",
-    "company": "quantum-tech",
-    "date": "Il y a 5 jours",
-    "contrat": "CDD",
-    "secteur": "Ressources humaines",
-    "metier": "Ressources Humaines",
-    "location": "Antananarivo",
-    "ia_risk_score": 5,
-    "ia_risk_level": "Moyen"
-  },
-  {
-    "title": "ÉCONOMAT",
-    "link": "https://www.asako.mg/annonces/8694-economat",
-    "company": "groupe-avu",
-    "date": "Il y a 8 jours",
-    "contrat": "CDD",
-    "secteur": "Restauration, hôtellerie",
-    "metier": "Non spécifié",
-    "location": "Antananarivo",
-    "ia_risk_score": 7,
-    "ia_risk_level": "Moyen"
-  },
-  {
-    "title": "PRÉPOSÉ(E) AUX BÉNÉFICIAIRES (P.A.B)",
-    "link": "https://www.asako.mg/annonces/8642-prepose-e-aux-beneficiaires-p-a-b",
-    "company": "p-a-g-e",
-    "date": "Il y a 10 jours",
-    "contrat": "CDD",
-    "secteur": "Logistique",
-    "metier": "Non spécifié",
-    "location": "Antananarivo",
-    "ia_risk_score": 5,
-    "ia_risk_level": "Moyen"
-  },
-  {
-    "title": "Gestionnaire Système d&#039;Information Santé Numérique",
-    "link": "https://www.asako.mg/annonces/8617-gestionnaire-systeme-d-information-sante-numerique",
-    "company": "ong-medicale-pivot",
-    "date": "Il y a 12 jours",
-    "contrat": "CDD",
-    "secteur": "Santé, Médecine",
-    "metier": "Non spécifié",
-    "location": "Fianarantsoa",
-    "ia_risk_score": 3,
-    "ia_risk_level": "Faible"
-  },
-  {
-    "title": "Agent Back Office / Auditeur Junior",
-    "link": "https://www.asako.mg/annonces/8542-agent-back-office-auditeur-junior",
-    "company": "finance-stream",
-    "date": "Il y a 19 jours",
-    "contrat": "CDD",
-    "secteur": "Gestion, Comptabilité, Finance",
-    "metier": "Agent ",
-    "location": "Antananarivo",
-    "ia_risk_score": 3,
-    "ia_risk_level": "Faible"
-  }
-]
+  "offers": [
+    {
+      "title": "Coordonnateur(rice)",
+      "link": "https://www.asako.mg/annonces/8764-coordonnateur-rice",
+      "company": "Ccoc",
+      "date": "2025-12-05",
+      "contrat": "Non spécifié",
+      "secteur": "Gestion, Comptabilité, Finance",
+      "metier": "Coordinateur",
+      "location": "Antananarivo",
+      "description": "",
+      "ia_risk_score": 2.0,
+      "ia_risk_level": "Faible",
+      "suggestions": [
+        "Maintenir à jour vos compétences",
+        "Développer une expertise complémentaire"
+      ],
+      "scraped_at": "2025-12-06 16:03:19"
+    }
+  ]
+}

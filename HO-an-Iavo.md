@@ -260,6 +260,104 @@ export const apiService = {
     api.get('/search', { params: { q: query, ...filters } }),
 };
 ```
+### NOUVEL ENDPOINT AJOUTÉ :
+```bash
+GET /api/jobs-by-risk
+```
+**Paramètres disponibles :**
+?level=high → Métiers à haut risque uniquement
+
+?level=medium → Métiers à risque moyen uniquement
+
+?level=low → Métiers à faible risque uniquement
+
+Pas de paramètre → Tous les métiers groupés par niveau
+
+#### 📊 Exemples d'utilisation :
+```javascript
+// Exemple avec Axios
+const apiService = {
+  // Obtenir tous les métiers groupés par risque
+  getJobsByRiskLevel: (level = 'all') => 
+    axios.get(`/api/jobs-by-risk?level=${level}`),
+  
+  // Obtenir uniquement les métiers à haut risque
+  getHighRiskJobs: () => 
+    axios.get('/api/jobs-by-risk?level=high'),
+  
+  // Obtenir uniquement les métiers à faible risque
+  getLowRiskJobs: () => 
+    axios.get('/api/jobs-by-risk?level=low'),
+}
+```
+🏗️ Structure de la réponse :
+Pour GET /api/jobs-by-risk (tous les niveaux) :
+```json
+{
+  "requested_level": "all",
+  "statistics": {
+    "high": {
+      "total_jobs": 1,
+      "total_offers": 1,
+      "avg_risk_score": 9.0
+    },
+    "medium": {
+      "total_jobs": 4, 
+      "total_offers": 8,
+      "avg_risk_score": 6.0
+    },
+    "low": {
+      "total_jobs": 5,
+      "total_offers": 7,
+      "avg_risk_score": 3.1
+    }
+  },
+  "jobs_by_risk": {
+    "high": [
+      {
+        "job_title": "Mécanicien",
+        "risk_level": "Élevé",
+        "risk_level_en": "high",
+        "count": 1,
+        "avg_risk_score": 9.0,
+        "suggestions": ["Formation en compétences...", "..."]
+      }
+    ],
+    "medium": [...],
+    "low": [...]
+  }
+}
+```
+#### Pour GET /api/jobs-by-risk?level=high :
+```json
+{
+  "requested_level": "high",
+  "statistics": {
+    "total_jobs": 1,
+    "total_offers": 1,
+    "avg_risk_score": 9.0
+  },
+  "jobs": [
+    {
+      "job_title": "Mécanicien",
+      "risk_level": "Élevé",
+      "risk_level_en": "high",
+      "count": 1,
+      "avg_risk_score": 9.0,
+      "suggestions": [
+        "Formation en compétences numériques (Excel, outils de gestion)",
+        "Reconversion vers la logistique ou la coordination",
+        "Développement de compétences en gestion de projet",
+        "Apprentissage des outils de relation client (CRM)"
+      ],
+      "example_title": "MECANICIEN CONDUCTEUR",
+      "example_sector": "Automobile",
+      "example_company": "Madagascar Ground Handling"
+    }
+  ]
+}
+```
+
 🎯 POUR LE PITCH DE 5 MINUTES :
 Scénario de démo :
 

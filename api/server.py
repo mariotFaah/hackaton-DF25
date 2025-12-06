@@ -11,6 +11,9 @@ def create_app():
     """Créer et configurer l'application Flask"""
     app = Flask(__name__)
     
+    # Configuration de l'application
+    app.config.from_object(config.Config)
+    
     # Configuration CORS
     CORS(app, origins=config.API_CONFIG["cors_origins"])
     
