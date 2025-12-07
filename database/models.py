@@ -1,5 +1,5 @@
 """
-Modèles de base de données SQLAlchemy
+Modèles de base de données SQLAlchemy - Version corrigée avec colonne source
 """
 
 from sqlalchemy import Column, Integer, String, Float, DateTime, Text, Boolean, ForeignKey
@@ -20,7 +20,7 @@ class JobOffer(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(500), nullable=False)
-    link = Column(String(500), unique=True, nullable=False)
+    link = Column(String(500), nullable=False)
     company = Column(String(200))
     date_posted = Column(String(100))
     contract_type = Column(String(100))
@@ -33,6 +33,12 @@ class JobOffer(Base):
     suggestions = Column(Text)
     scraped_at = Column(DateTime, default=datetime.utcnow)
     is_active = Column(Boolean, default=True)
+    
+    # NOUVELLES COLONNES AJOUTÉES
+    deadline = Column(String(100), nullable=True)  # Date limite
+    is_urgent = Column(Boolean, default=False)    # Offre urgente
+    reference = Column(String(200), nullable=True) # Référence
+    source = Column(String(50), default='asako')  # Source: 'asako' ou 'portaljob'
 
 class JobRecommendation(Base):
     __tablename__ = 'job_recommendations'
@@ -75,10 +81,12 @@ except Exception as e:
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def init_db():
-    """Initialiser la base de données - NE PAS UTILISER car tables existent déjà"""
-    print("ℹ️  Les tables existent déjà (créées par repair_database.py)")
-    print("ℹ️  Pour recréer, exécutez: python3 repair_database.py")
-    return True
+    """Initialiser la base de données"""
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("✅ Tables créées avec succès!")
+    except Exception as e:
+        print(f"❌ Erreur création tables: {e}")
 
 def get_db():
     """Obtenir une session de base de données"""
@@ -88,7 +96,7 @@ def get_db():
     finally:
         db.close()
 
-# Méthode pour convertir en dictionnaire
+# Méthode pour convertir en dictionnaire - VERSION CORRIGÉE
 def to_dict(self):
     """Convertir l'objet en dictionnaire"""
     return {
@@ -106,7 +114,12 @@ def to_dict(self):
         'ia_risk_level': self.ia_risk_level,
         'suggestions': self.suggestions.split(', ') if self.suggestions else [],
         'scraped_at': self.scraped_at.isoformat() if self.scraped_at else None,
-        'is_active': self.is_active
+        'is_active': self.is_active,
+        # NOUVEAUX CHAMPS
+        'deadline': self.deadline,
+        'is_urgent': self.is_urgent,
+        'reference': self.reference,
+        'source': self.source
     }
 
 # Attacher la méthode à la classe

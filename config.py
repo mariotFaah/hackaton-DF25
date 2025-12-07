@@ -11,7 +11,7 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'safe-ai-hackathon-secret-key')
     DEBUG = os.getenv('FLASK_DEBUG', True)
     
-    # Base de données
+    # Base de données - AVEC LE BON MOT DE PASSE
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'mysql+pymysql://admin:mot_de_passe@localhost/safe_ai_hackathon')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
@@ -34,7 +34,7 @@ class Config:
     DATA_DIR = "data"
     LOG_DIR = "logs"
 
-# Configuration pour l'API (compatibilité) - GARDEZ CE DICTIONNAIRE
+# Configuration pour l'API (compatibilité)
 API_CONFIG = {
     "host": Config.API_HOST,
     "port": Config.API_PORT,
@@ -44,3 +44,6 @@ API_CONFIG = {
 
 # Pour compatibilité
 app_config = Config
+
+# AJOUTEZ CETTE LIGNE POUR LA COMPATIBILITÉ
+DATABASE_URL = Config.SQLALCHEMY_DATABASE_URI
